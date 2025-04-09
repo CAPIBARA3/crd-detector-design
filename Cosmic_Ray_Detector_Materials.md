@@ -12,13 +12,13 @@
 | Plastic scintillator | 1 sheet | https://eljentechnology.com/products/plastic-scintillators/ej-200-ej-204-ej-208-ej-212 or https://www.luxiumsolutions.com/radiation-detection-scintillators/plastic-scintillators/bc400-bc404-bc408-bc412-bc416 | General purpose plastic scintillator | - |
 | Welding tin | - | - | - | - |
 | Coaxial connectors | 2 units | https://www.mouser.es/ProductDetail/Wurth-Elektronik/60312202114512?qs=3jNSNtuqJTLnrLNuFy3roA%3D%3D or Diotronic (https://diotronic.com/conectores-sma/12107-20265-bt-con-sma-hembra-pcb ) | - | 3.42 € (by diotronic) |
-| Preamplifier | 1 unit | Google search: preamp for SiPm circuit | 3 ports | - |
+| Preamplifier | 1 unit | https://n9.cl/061xj | I'm not completely sure that this amplifier would work, we could contact with IFAE and ask them | 324,3 €  |
 
 ## 2. Black Box
 
 | Name | Quantity | Where to buy | Other details | Price (total) |
 | --- | --- | --- | --- | --- |
-| Plastic or Metal Black Box | 1 unit | - | A plastic box would lighter, but less durable than a metal one | - |
+| Plastic or Metal Black Box | 1 unit | https://n9.cl/h4e5a | Model: FB83X81X56 or FB100X68X50 | 1 € (aliexpress) |
 | Aluminium foil | 10x10 cm | https://n9.cl/ja1sx or any other | Preferably with a rough surface (it would be better to reflect the photons in all directions) | 1.88 € (by aliexpress) |
 | Glue and insulating tape | - | - | - | - |
 | Male – female screws | - | - | - | - |
