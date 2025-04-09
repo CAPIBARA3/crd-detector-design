@@ -19,6 +19,6 @@
 | Name | Quantity | Where to buy | Other details | Price (total) |
 | --- | --- | --- | --- | --- |
 | Plastic or Metal Black Box | 1 unit | https://n9.cl/h4e5a | Model: FB83X81X56 or FB100X68X50 | 1 € (aliexpress) |
-| Aluminium foil | 10x10 cm | https://n9.cl/ja1sx or any other | Preferably with a rough surface (it would be better to reflect the photons in all directions) | 1.88 € (by aliexpress) |
+| Aluminium foil | 60x60 cm | https://n9.cl/ja1sx or any other | Preferably with a rough surface (it would be better to reflect the photons in all directions) | 1.88 € (by aliexpress) |
 | Glue and insulating tape | - | - | - | - |
 | Male – female screws | - | - | - | - |
