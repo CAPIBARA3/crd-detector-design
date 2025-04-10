@@ -22,3 +22,9 @@
 | Aluminium foil | 60x60 cm | https://n9.cl/ja1sx or any other | Preferably with a rough surface (it would be better to reflect the photons in all directions) | 1.88 € (by aliexpress) |
 | Glue and insulating tape | - | - | - | - |
 | Male – female screws | - | - | - | - |
+
+## 3. Software Systems
+| Name | Quantity | Where to buy | Other details | Price (total) |
+| --- | --- | --- | --- | --- |
+| Arduino Nano Every | 1 unit | [arduino.cc](https://store.arduino.cc/en-es/products/arduino-nano-every?utm_source=chatgpt.com) | size: 45x18mm, required power: 5V | 15.25 € |
+| FRAM Card | 1 unit | [adafruit.com](https://www.adafruit.com/product/1895?utm_source=chatgpt.com) | size: 15.5x20x2mm | 8.89 € |
