@@ -8,7 +8,7 @@
 | 12 nF Capacitor | 8 units | Diotronic or [digikey.es](https://www.digikey.es/es/products/detail/kemet/SMP255FA5120MB31TV24/24420519)| - | 10.48 € |
 | Protoboard | 1 unit | [diotronic](https://diotronic.com/modulos-proto-board/6080-placa-board-400-puntos) | 5.5cm x 17cm | 4.45€ |
 | Blank Board | 2 units | https://n9.cl/rfkgm or [Diotronic](https://diotronic.com/placas-de-topos/6016-placa-baq-topos-2-54-78x90 ) | - | 1 € (by aliexpress) |
-| Silicon Photomultiplier | 2 units | - | Wide range of prices (from 30€ to 1000€) | - |
+| Silicon Photomultiplier | 2 units | - | Wide range of prices (from 30€ to 1000€) | @luke3773 |
 | Plastic scintillator | 2 sheets | https://eljentechnology.com/products/plastic-scintillators/ej-200-ej-204-ej-208-ej-212 or https://www.luxiumsolutions.com/radiation-detection-scintillators/plastic-scintillators/bc400-bc404-bc408-bc412-bc416 | General purpose plastic scintillator | @luke3773 |
 | Welding tin | - | - | - | @luke3773 |
 | Coaxial connectors | 4 units | https://www.mouser.es/ProductDetail/Wurth-Elektronik/60312202114512?qs=3jNSNtuqJTLnrLNuFy3roA%3D%3D or Diotronic (https://diotronic.com/conectores-sma/12107-20265-bt-con-sma-hembra-pcb ) | - | 6.84 € (by diotronic) |
