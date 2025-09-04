@@ -1,7 +1,7 @@
 # Technical drawings
 Here you can find the technical drawings of the current design of the detector.
 
-#Version 2.1
+# Version 2.1
 
 The first two parts correspond to the body of the detector:
 1. External body right part
