@@ -1,0 +1,306 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[myheadings]{fullpage}
+\DeclareUnicodeCharacter{0301}{\hspace{-1ex}\'}
+\usepackage[english]{babel}
+\usepackage[backend=bibtex, style=authoryear]{biblatex}
+\addbibresource{references.bib}
+\usepackage{longtable}
+\usepackage{multicol}
+
+% Package for headers 
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+% For figures and stuff
+\usepackage{subcaption, setspace, booktabs}
+\usepackage[T1]{fontenc}
+
+% Change for different font sizes and families
+\usepackage[font=small, labelfont=bf]{caption}
+\usepackage{fourier}
+\usepackage[protrusion=true, expansion=true]{microtype}
+
+% Maths
+\usepackage{amsfonts}
+\usepackage{amsmath,amssymb}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+% custom commands
+\newcommand{\jcomment}[1]{\textcolor{red}{joanalnu: #1}}
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Technical Documentation for [Instrument Name]}
+\fancyhead[R]{\thepage}
+
+% landspace
+\usepackage{pdflscape}
+\usepackage{fancyhdr}
+
+\begin{document}
+
+% Cover Page
+\begin{titlepage}
+    \centering
+    \vspace*{1cm}
+    
+    \Huge
+    \textbf{Technical Documentation for the CAPIBARA Cosmic Ray Detector}
+    
+    \vspace{0.5cm}
+    \LARGE
+    CAPIBARA Collaboration
+    
+    \vspace{1.5cm}
+    
+    \textbf{Date:} \today \\
+    \textbf{Prepared by:} [Your Name/Team] \\
+    \textbf{Version:} v0.1
+    
+    \vfill
+    
+    % \includegraphics[width=0.75\textwidth]{logo.png} % Include your logo here
+    
+    \vspace{0.8cm}
+\end{titlepage}
+
+% Table of Contents
+\tableofcontents
+\newpage
+
+\section{Introduction}
+The Collaboration for the Analysis of Ionic and Photonic Bursts and Radiation (CAPIBARA) publishes this documentation in order to provide a general overview of the Cosmic Ray Detector instrument. This instrument complies with its goal to observe the high-energy ionic radiation on Earth's orbit and is developed in the context of a space mission with the OBA FARADAY satellite and partnering with more entities in the context of the SPARK Program by PLD Space. Additionally, it acts as a manual and information paper for everyone using the data from our detector and wanting to know more about it. This document covers the aspects ranging from design specification and software usage to the operation as well as performance metrics and other important information.
+
+\section{Instrument Overview}
+\subsection{Description}
+Cosmic Rays (CRs) or cosmic radiation are charged particles coming from the Universe at high energy due to their high velocities \cite{uchicagonews}. Their cosmic origin is widely accepted, but specific sources remain uncertain due to interactions with magnetic fields that corrupt source information. Our cosmic ray detector can detect these particles, mainly protons ($p^+$) and $\alpha$-particles from the Sun, coherent with the composition of CRs (Table \ref{tab:composition}).
+
+\begin{table}[H]
+        \centering
+        \vspace{1.0cm}
+        \begin{tabular}{c|c}
+            \textbf{Type} & \textbf{Percentage}\\ \hline
+             Protons &  $\sim 87\%$ \\
+             $\alpha$ particles & $\sim 10\%$ \\
+             Electrons & $\sim 2\%$ \\
+             Light elements (Li, Be, B, ...) & $\sim 0.25\%$ \\
+             Antimatter & $\sim 0.01\%$ \\
+        \end{tabular}
+        \caption{Composition of primary cosmic rays from \cite{poster14}.}
+        \label{tab:composition}
+    \end{table}
+
+\subsection{Applications}
+This scientific payload has a variety of application in different fields:
+\begin{itemize}
+    \item \textbf{Particle Physics:} particles physics is directly related with the study of subatomic particles at high velocities. The cosmos acts as a free particle accelerator, where cosmic ray particles are detected up to the TeV regime \cite{heasarcherdwebsite}, similar and eventually higher than the energies reached at CERN. This enables, although with smaller detectors, the study of this highly energetic protons.
+    \item \textbf{Stellar and Solar Astrophysics:} By analyzing the protons coming from the Sun, its activity as star and background stations can be studied. This includes fusion energy, but also stellar atmosphere and bursts.
+    \item \textbf{Space Flight Safety:} Related to the study of solar radiation is also the topic of space flight safety. By studying the composition and energy spectra, the materials and composition for both instrumental and human radiation shielding for space mission can be studied. This is becoming increasingly important in the era of NewSpace and long duration and deep space human spaceflight.
+    \item \textbf{Medicine:} Medicine has long benefited from particle physics, from the discovery of X-rays to radiation treatments. We hope this detections will also contributed to the development of new medical techniques.
+\end{itemize}
+
+\newpage
+\section{Design Specifications}
+\subsection{Mechanical Design}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{mechanical_design.png} % Include your mechanical design image
+    \caption{Mechanical Design of [Instrument Name]}
+    \label{fig:mechanical_design}
+\end{figure}
+Explain the mechanical design considerations.
+
+\subsection{Electrical Design}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{electrical_design.png} % Include your electrical design image
+    \caption{Electrical Schematic of [Instrument Name]}
+    \label{fig:electrical_design}
+\end{figure}
+Discuss the electrical components and their functions.
+
+\subsection{Software Design}\label{sec:software_design}
+In this section we will elaborate on both the onboard and the Earth-based software systems. For the storing of the detections onboard until the main satellite computer asks our instrument to fetch data for to-ground transmission we will use the procedure describe herewith. As accorded in the partnership report to the SPARK program, we will use OBA Faraday's computer and communication system to downlink data. The output of the instrument outlined in section \ref{sec:detection_mechanism} is a voltage differential. Therefore, we will employ an Arduino for the read of this voltage and ferroelectric random access memory (FRAM) units for the temporary storing of the data. The properties of the items are the following:
+
+\begin{multicols}{2}
+    \begin{itemize}
+        \item \textbf{Arduino Nano Every}:
+        \begin{itemize}
+            \item Size: 45$\times$18mm
+            \item Power: $5$V
+            \item Source: \href{https://store.arduino.cc/en-es/products/arduino-nano-every}{arduino.cc}
+            \item Price: 15.25 €
+            \item Quantity: 1
+        \end{itemize}
+    \end{itemize}
+    
+    \begin{itemize}
+        \item \textbf{SPI FRAM}:
+        \begin{itemize}
+            \item Size: $\sim 1.7 \times 5 \times 5$mm
+            \item Capacity: 512KB (or 4Mbit)
+            \item Source: \href{https://www.infineon.com/cms/en/product/memories/f-ram-ferroelectric-ram/fm25v05-gtr/}{infineon}, \href{https://www.infineon.com/cms/en/product/memories/f-ram-ferroelectric-ram/cy15b104q-sxi/}{infineon}, or \href{https://www.infineon.com/cms/en/product/memories/f-ram-ferroelectric-ram/excelon-f-ram/cy15b104qsn-108sxi/}{infineon}
+            \item Price: \jcomment{missing}
+            \item Quantity: 19
+        \end{itemize}
+    \end{itemize}
+\end{multicols}
+
+We choose the combination of Arduino+FRAM over using a Raspberry Pi, which already has integrated file management and storing, as Raspberry Pi is more susceptible to data and software corruption via space radiation due to the complexity of the software and inherent OS. Thus, Arduino is a simple, robust, and compact system, as well as FRAM cards, which are commonly used in CubeSat missions. They use ferroelectric layer, making it resistant to bit flips, have virtually unlimited write cycles ($10^{14}+$) and don't have charge storage.
+
+The necessity for $19$ $512$ KB units arises as, in contact with OBA Space, we have decided to have a buffer time of 1 week between to-ground downlinks, althought the transmission should have a regular period of 3-4 days Therefore, we need to have the capacity to store 1-week worth of data in our software systems. The structure of our data is outlined in table \ref{tab:fram_data_structure}, one entry consisting of two times 8 bytes each second and giving a write speed of $16$B/sec. This sums up to $9.6768$ MB for 1 week worth of entries. $19 \times 512 \text{KB} = 9,728KB$ just above the required margin.
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{c|c|c}
+        Bytes & field & Description \\ \hline
+        1 & Marker (\verb|0xAA|) & Identifies a valid entry start \\
+        2-5 & Timestamp & 4-byte \verb|millis()| value \\
+        6-7 & ADC reading & 2-byte voltage value (10-bit ADC) \\
+        8 & CRC-8 & XOR of previous 7 bytes \\ \hline
+    \end{tabular}
+    \caption{Overview of the data structure used for the FRAM card. For data redundancy and safety we intend to store each entry twice, therefore one detection will occupy 16 bytes.}
+    \label{tab:fram_data_structure}
+\end{table}
+
+A preliminar pseudo-code of the algorithms is available at \href{https://github.com/capibara3/capicr-software}{capibara3/capicr-software}. Regarding the Earth-side data reduction, we intend to provide both the raw data in \verb|bin|, \verb|txt|, and \verb|csv| formats. Thus, the code mainly decompress the binary files incoming from the satellite and create corresponding files in different output formats. The publication pipeline and system is still being discussed; this document will be updated when a decision is taken.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{software_flowchart.png}
+    % Include your software flowchart
+    \caption{Software Flowchart for CAPICR}
+    \label{fig:software_flowchart}
+\end{figure}
+
+
+\newpage % Start a new page
+
+% Custom margins for landscape page
+% \newgeometry{left=2cm, right=2cm, top=0.5cm, bottom=0.5cm}
+
+\begin{landscape}
+\fancyhf{} % Clear all header and footer fields
+
+\section{Components and Materials}
+
+\subsection*{1. Circuit}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{@{}lllp{5cm}l@{}}
+        \toprule
+        Name & Quantity & Where to buy & Other details & Price (total) \\ \midrule
+        51 Ohm Resistor & 4 units & Diotronic or \href{https://www.digikey.es/es/products/detail/stackpole-electronics-inc/CF18JT51R0/1741732}{digikey} & - & 0.36 € \\
+        12 nF Capacitor & 8 units & Diotronic or \href{https://www.digikey.es/es/products/detail/kemet/SMP255FA5120MB31TV24/24420519}{digikey} & - & 10.48 € \\
+        Protoboard & 1 unit & \href{https://diotronic.com/modulos-proto-board/6080-placa-board-400-puntos} & 5.5cm x 17cm & 4.45 € \\
+        Blank Board & 2 units & \href{https://n9.cl/rfkgm} or \href{https://diotronic.com/placas-de-topos/6016-placa-baq-topos-2-54-78x90}{diotronic} & - & 1 € (by aliexpress) \\
+        Silicon Photomultiplier & 2 units & - & Wide range of prices (from 30€ to 1000€) & - \\
+        Plastic scintillator & 2 sheets & \href{https://eljentechnology.com/products/plastic-scintillators/ej-200-ej-204-ej-208-ej-212}{eljentechnology} or \href{https://www.luxiumsolutions.com/radiation-detection-scintillators/plastic-scintillators/bc400-bc404-bc408-bc412-bc416}{luxiumsolutions} & General purpose plastic scintillator & @luke3773 \\
+        Welding tin & - & - & - & @luke3773 \\
+        Coaxial connectors & 4 units & \href{https://www.mouser.es/ProductDetail/Wurth-Elektronik/60312202114512?qs=3jNSNtuqJTLnrLNuFy3roA\%3D\%3D}{mouser} or \href{https://diotronic.com/conectores-sma/12107-20265-bt-con-sma-hembra-pcb}{diotronic} & - & 6.84 € (by diotronic) \\
+        Preamplifier & 2 units & \url{https://n9.cl/061xj} & I'm not completely sure that this amplifier would work, we could contact with IFAE and ask them. (@luke3773, do it, you have the direct contact) & 648.6 € \\ \bottomrule
+    \end{tabular}
+    \caption{Material list for the electrical circuit, as retrieved from \href{https://github.com/capibara3/capicr-detector-design}{capibara3/capicr-detector-design} (last checked May 2, 2025).}
+\end{table}
+
+
+\subsection*{2. Black Box}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{@{}lllp{5cm}l@{}}
+        \toprule
+        Name & Quantity & Where to buy & Other details & Price (total) \\ \midrule
+        Plastic or Metal Black Box & 1 unit & \href{https://n9.cl/h4e5a}{aliexpress} & Model: FB83X81X56 or FB100X68X50 & 1 € (aliexpress) \\
+        Aluminium foil & 60x60 cm & \href{https://n9.cl/ja1sx}{aliexpress} or any other & Preferably with a rough surface (it would be better to reflect the photons in all directions) & 1.88 € (by aliexpress) \\
+        Glue and insulating tape & - & - & - & - \\
+        Male – female screws & - & - & - & - \\ \bottomrule
+    \end{tabular}
+    \caption{Material list for black box, as retrieved from \href{https://github.com/capibara3/capicr-detector-design}{capibara3/capicr-detector-design} (last checked May 2, 2025).}
+\end{table}
+
+\subsection*{3. Software Systems}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{@{}lllp{5cm}l@{}}
+        \toprule
+        Name & Quantity & Where to buy & Other details & Price (total) \\ \midrule
+        Arduino Nano Every & 1 unit & \href{https://store.arduino.cc/en-es/products/arduino-nano-every}{arduino} & size: 45x18mm, required power: 5V & 15.25 € \\
+        SPI FRAM 512KB card & 19 units & \href{https://www.infineon.com/cms/en/product/memories/f-ram-ferroelectric-ram/fm25v05-gtr/}{infineon}, \href{https://www.infineon.com/cms/en/product/memories/f-ram-ferroelectric-ram/cy15b104q-sxi/}{infineon}, or \href{https://www.infineon.com/cms/en/product/memories/f-ram-ferroelectric-ram/excelon-f-ram/cy15b104qsn-108sxi/}{infineon} & size: $\sim 1.7 \times 5 \times 5$mm& - \\ \bottomrule
+    \end{tabular}
+    \caption{Material list for the software-related compotents, as retrieved from \href{https://github.com/capibara3/capicr-detector-design}{capibara3/capicr-detector-design} (last checked May 2, 2025).}
+\end{table}
+\end{landscape}
+\restoregeometry
+
+
+
+
+\newpage
+\section{Operational Principles}
+\subsection{Detection Mechanism}\label{sec:detection_mechanism}
+Time-of-flight detectors work in pairs, and they trigger a clock when a particle hits the first one, which is stopped when the second one is hit. Then, through a series of calculations, the particle velocity can be obtained. In our case, and as many other satellites CR detectors (i.e. PAMELA\footnote{\href{https://pamela.roma2.infn.it/}{https://pamela.roma2.infn.it/}}, AMS\footnote{\href{https://ams02.space/}{https://ams02.space/}}), scintillators can be used. Scintillators are materials that exhibit scintillation, which is the physical process through which a material emits a flash of light when it is hit by a charged particle, for instance, protons or $\alpha$ particles \cite{x-andgamma-rayscintillators}. This light is then detected with photo-multipliers which are part of an electrical circuit that can recognize a difference in the voltage. The main disadvantage of scintillators is that the light produced is not linear, which means that the energy can not be inferred \cite{CRDPrinc_of_Op}.
+
+\subsection{Signal Processing}
+From the detector, we are receiving a voltage differential, as mentioned in section \ref{sec:detection_mechanism}. As described in section \ref{sec:software_design} are data structure will consist of 8-byte packages with following information: starting byte, data, timestamp, CRC test (XOR operation result). The voltage in differential will be receiving by our onboard Arduino and will be processed in order to save this data and metadata to the storage unit onboard.
+
+The CRC test (Cyclic Redundancy Check) is a method used to detect errors (i.e. integrity) in digital data. In our case, it is calculated before the storing of the data and stored together in the 8-byte package. The value stored is the result of the XOR bit-based operation on the detected data. When data is downlinked to Earth or when it is read, we can recompute the CRC with the incoming values, if the CRC results differ, then the data has been corrupted. CRC is a good option for satellite missions' data corruption checks due to its high accuracy (single-bit errors are detectable) and it's fast and lightweight, making it simple to implement in terms of software without adding much complexity to a system with limited resources.
+
+Once the data is on Earth, from the CAPIBARA Collaboration we will extract the data from its binary format and make it public for every use. For our database, we would like to make raw binary data as well as compressed txt and/or csv data tables available. In any case, we are still considering if we would like submitting our instrument to a greater cosmic ray database to integrate our data there.
+
+
+% \newpage
+% \section{Performance Metrics}
+
+% \subsection{Sensitivity}
+% Define sensitivity and provide relevant data.
+
+% \subsection{Resolution}
+% Discuss resolution and its importance in detection.
+
+% \subsection{Calibration}
+% Explain the calibration process and its significance.
+
+% \newpage
+% \section{Safety and Compliance}
+% \subsection{Safety Standards}
+% List relevant safety standards applicable to the instrument.
+
+% \subsection{Compliance Regulations}
+% Discuss compliance with industry regulations.
+
+% \newpage
+% \section{Maintenance and Troubleshooting}
+% \subsection{Routine Maintenance}
+% Provide a checklist for routine maintenance tasks.
+
+% \subsection{Common Issues and Solutions}
+% Create a troubleshooting guide for common issues.
+
+% \begin{longtable}{|l|l|l|}
+%     \hline
+%     \textbf{Issue} & \textbf{Symptoms} & \textbf{Solution} \\
+%     \hline
+%     Example Issue & Description & Solution Steps \\
+%     \hline
+% \end{longtable}
+
+% \newpage
+% \section{Appendices}
+% \subsection{Diagrams and Schematics}
+% Include additional diagrams and schematics as needed.
+
+% \subsection{Glossary of Terms}
+% Define technical terms used in the document.
+
+% \bibliographystyle{authoryear}
+% \bibliography{references}
+\nocite{*}
+\printbibliography
+
+\end{document}
